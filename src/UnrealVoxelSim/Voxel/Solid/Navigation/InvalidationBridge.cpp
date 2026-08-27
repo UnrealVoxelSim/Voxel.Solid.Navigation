@@ -13,4 +13,4 @@ namespace UnrealVoxelSim::Voxel::Solid::Navigation
 	}
 
 	InvalidationBridge::~InvalidationBridge() { m_Subscription.Reset(); }
-} // namespace UnrealVoxelSim::Voxel::Solid::Navigation
+}

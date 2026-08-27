@@ -28,4 +28,4 @@ namespace UnrealVoxelSim::Voxel::Solid::Navigation
 	private:
 		Events::Api::Subscription m_Subscription;
 	};
-} // namespace UnrealVoxelSim::Voxel::Solid::Navigation
+}

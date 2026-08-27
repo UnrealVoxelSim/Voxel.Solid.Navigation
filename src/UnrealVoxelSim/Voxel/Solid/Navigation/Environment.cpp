@@ -49,4 +49,4 @@ namespace UnrealVoxelSim::Voxel::Solid::Navigation
 		});
 		return {};
 	}
-} // namespace UnrealVoxelSim::Voxel::Solid::Navigation
+}
