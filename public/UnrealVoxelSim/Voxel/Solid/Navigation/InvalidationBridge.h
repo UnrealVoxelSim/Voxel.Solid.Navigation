@@ -12,6 +12,6 @@ class InvalidationBridge final
     InvalidationBridge(const InvalidationBridge &) = delete;
     InvalidationBridge &operator=(const InvalidationBridge &) = delete;
   private:
-    Events::Api::Subscription Subscription_;
+    Events::Api::Subscription m_Subscription;
 };
 } // namespace UnrealVoxelSim::Voxel::Solid::Navigation

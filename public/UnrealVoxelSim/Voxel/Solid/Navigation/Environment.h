@@ -16,6 +16,6 @@ class Environment final : public UnrealVoxelSim::Navigation::Voxel::Api::IEnviro
         std::span<UnrealVoxelSim::Navigation::Voxel::Api::Cell> output) const override;
   private:
     class Impl;
-    std::unique_ptr<Impl> Impl_;
+    std::unique_ptr<Impl> m_Impl;
 };
 } // namespace UnrealVoxelSim::Voxel::Solid::Navigation

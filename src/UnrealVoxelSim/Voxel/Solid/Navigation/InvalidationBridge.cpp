@@ -5,7 +5,7 @@ namespace UnrealVoxelSim::Voxel::Solid::Navigation
 InvalidationBridge::InvalidationBridge(Api::IChangeSource &changes,
                                        UnrealVoxelSim::Navigation::Voxel::Api::IInvalidationSink &sink)
 {
-    Subscription_ = changes.Subscribe([&sink](const Api::Changed &changed) noexcept { sink.Invalidate(changed.Regions); });
+    m_Subscription = changes.Subscribe([&sink](const Api::Changed &changed) noexcept { sink.Invalidate(changed.Regions); });
 }
-InvalidationBridge::~InvalidationBridge() { Subscription_.Reset(); }
+InvalidationBridge::~InvalidationBridge() { m_Subscription.Reset(); }
 } // namespace UnrealVoxelSim::Voxel::Solid::Navigation

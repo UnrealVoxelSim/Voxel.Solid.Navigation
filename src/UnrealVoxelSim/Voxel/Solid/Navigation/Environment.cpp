@@ -16,22 +16,22 @@ class Environment::Impl final
     std::thread::id OwnerThread{std::this_thread::get_id()};
 };
 Environment::Environment(const UnrealVoxelSim::Voxel::Api::IBounds &bounds, const Api::IRegionReader &reader)
-    : Impl_(std::make_unique<Impl>(bounds, reader)) {}
+    : m_Impl(std::make_unique<Impl>(bounds, reader)) {}
 Environment::~Environment() = default;
 UnrealVoxelSim::Voxel::Api::Region Environment::Bounds() const noexcept
 {
-    Impl_->AssertOwnerThread();
-    return Impl_->BoundsReader.Bounds();
+    m_Impl->AssertOwnerThread();
+    return m_Impl->BoundsReader.Bounds();
 }
 std::expected<void, UnrealVoxelSim::Voxel::Api::ReadError> Environment::ReadRegion(
     const UnrealVoxelSim::Voxel::Api::Region region,
     const std::span<UnrealVoxelSim::Navigation::Voxel::Api::Cell> output) const
 {
-    Impl_->AssertOwnerThread();
-    Impl_->Scratch.resize(output.size());
-    const auto result = Impl_->Reader.ReadRegion(region, Impl_->Scratch);
+    m_Impl->AssertOwnerThread();
+    m_Impl->Scratch.resize(output.size());
+    const auto result = m_Impl->Reader.ReadRegion(region, m_Impl->Scratch);
     if (!result) return std::unexpected{result.error()};
-    std::ranges::transform(Impl_->Scratch, output.begin(), [](const Api::Cell cell) {
+    std::ranges::transform(m_Impl->Scratch, output.begin(), [](const Api::Cell cell) {
         const auto occupied = !cell.IsEmpty();
         return UnrealVoxelSim::Navigation::Voxel::Api::Cell{occupied, occupied, 1000};
     });
